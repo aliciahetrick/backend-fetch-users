@@ -1,6 +1,6 @@
-# SQL _ Structured Query Language
+# SQL aka Structured Query Language
 
-- allows users to query manipulate and transform data from a relational database
+allows users to query manipulate and transform data from a relational database
 
 a relational databse is a collection of related two dimensional tables
 
