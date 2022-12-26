@@ -77,3 +77,12 @@ WHERE condition(s)
 ORDER BY column ASC/DESC
 LIMIT num_limit OFFSET num_offset;
 ```
+
+## Multi-table queries with JOINS
+
+data is usually broken down across multiple tables using `normalization`
+
+https://sqlbolt.com/lesson/select_queries_with_joins
+
+
+
