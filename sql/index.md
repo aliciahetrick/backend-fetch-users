@@ -48,3 +48,32 @@ NOT LIKE
 _
 IN (…)
 NOT IN (…)
+
+## FILTERING AND SORTING QUERY RESULTS
+
+you can discard rows that have a duplicate column value by using the DISTINCT keyword:
+
+``` SQL
+SELECT DISTINCT column, another_column, …
+FROM mytable
+WHERE condition(s);
+```
+
+you can also sort/order columns: 
+
+``` SQL
+SELECT column, another_column, …
+FROM mytable
+WHERE condition(s)
+ORDER BY column ASC/DESC;
+```
+
+LIMIT will reduce the number of rows returned and optional OFFSET will specify where to begin counting rows from:
+
+``` SQL
+SELECT column, another_column, …
+FROM mytable
+WHERE condition(s)
+ORDER BY column ASC/DESC
+LIMIT num_limit OFFSET num_offset;
+```
