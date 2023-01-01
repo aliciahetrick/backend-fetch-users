@@ -25,3 +25,25 @@ Sequelize - a promise based node.js ORM (object relatioal mapping) for Postgres
 - ORM connects OOP (Object oriented programing) to relational databases
 
 node-postgres - collection of node.js modules for interfacing with postgres
+
+## psql is a terminal-based front-end to PostgreSQL. It enables you to type in queries interactively, issue them to PostgreSQL, and see the query results.
+
+`brew services start postgresql`
+`psql postgres`
+
+anything installed with brew, installs globally
+
+You’ll see that we’ve entered into a new connection. We’re now inside psql in the postgres database. The prompt ends with a # to denote that we’re logged in as the superuser, or root:
+
+`postgres=#`
+
+Commands within psql start with a backslash \. To test our first command, we can check what database, user, and port we’ve connected to using the \conninfo command.
+
+`postgres=# \conninfo`
+You are connected to database "postgres" as user "your_username" via socket in "/tmp" at port "5432".
+
+\q: Exit psql connection
+\c: Connect to a new database
+\dt: List all tables
+\du: List all roles
+\list: List databases
