@@ -26,6 +26,7 @@ async function fetchUsers() {
     tr.appendChild(td1)
     tr.appendChild(td2)
     tr.appendChild(tableButton)
+
     usersTable.append(tr)
 
     // DELETE
@@ -40,11 +41,20 @@ async function fetchUsers() {
         },
         body: JSON.stringify(usersTable),
       })
-      // after a user is deleted, need to update table
+      // TODO:
+      // after a user is deleted, need to update table, does not auto refresh
       console.log(response)
       console.log(json)
     })
   }
+
+  // TODO:
+  // can add classList to last child in table then append new row to the table
+  // instead of removing all children, more efficent
+  const lastChild = document.querySelector('.users-table').lastChild
+  console.log(lastChild)
+  lastChild.classList.add('lastTableEntry')
+  lastChild.style.color = 'red'
 }
 
 fetchUsers()
