@@ -1,6 +1,17 @@
 // selects element where users data will be placed
 const usersTable = document.querySelector('.users-table')
 
+// removes current table child elements and fetchesUsers
+function removeChidlrenAndFetchUsers() {
+  function removeAllChildNodes(parent) {
+    while (parent.firstChild) {
+      parent.removeChild(parent.firstChild)
+    }
+  }
+  removeAllChildNodes(usersTable)
+  fetchUsers()
+}
+
 // GET - fetches all users
 async function fetchUsers() {
   const response = await fetch('http://localhost:3000/users/')
@@ -31,8 +42,6 @@ async function fetchUsers() {
 
     // DELETE
     tableButton.addEventListener('click', async function () {
-      console.log(json[i].id)
-
       const response = await fetch(`http://localhost:3000/users/${json[i].id}`, {
         method: 'DELETE',
         headers: {
@@ -41,20 +50,18 @@ async function fetchUsers() {
         },
         body: JSON.stringify(usersTable),
       })
-      // TODO:
-      // after a user is deleted, need to update table, does not auto refresh
-      console.log(response)
-      console.log(json)
+      removeChidlrenAndFetchUsers()
     })
   }
 
   // TODO:
   // can add classList to last child in table then append new row to the table
   // instead of removing all children, more efficent
-  const lastChild = document.querySelector('.users-table').lastChild
-  console.log(lastChild)
-  lastChild.classList.add('lastTableEntry')
-  lastChild.style.color = 'red'
+
+  // const lastChild = document.querySelector('.users-table').lastChild
+  // console.log(lastChild)
+  // lastChild.classList.add('lastTableEntry')
+  // lastChild.style.color = 'red'
 }
 
 fetchUsers()
@@ -80,23 +87,11 @@ function addUser() {
       body: JSON.stringify(newUser),
     })
 
-    // can add classList to last child in table then append new row to the table
-    // instead of removing all children, more efficent
-
     // removes all child elements created in fetchUser
-    function removeAllChildNodes(parent) {
-      while (parent.firstChild) {
-        parent.removeChild(parent.firstChild)
-      }
-    }
-    removeAllChildNodes(usersTable)
-
-    // repopulates the whole table with new user added
-    fetchUsers()
+    removeChidlrenAndFetchUsers()
   })
 }
 
 addUser()
 
 // PUT
-// DELETE
