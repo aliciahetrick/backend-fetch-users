@@ -1,13 +1,13 @@
-//selects element where users data will be placed
+// selects element where users data will be placed
 const usersTable = document.querySelector('.users-table')
 
-//GET - fetches all users
+// GET - fetches all users
 async function fetchUsers() {
   const response = await fetch('http://localhost:3000/users/')
   const json = await response.json()
-  //console.log(json)
+  // console.log(json)
 
-  //creating the table
+  // creating the table
   for (let i = 0; i < json.length; i++) {
     const td0 = document.createElement('td')
     td0.append(json[i].id)
@@ -27,6 +27,23 @@ async function fetchUsers() {
     tr.appendChild(td2)
     tr.appendChild(tableButton)
     usersTable.append(tr)
+
+    // DELETE
+    tableButton.addEventListener('click', async function () {
+      console.log(json[i].id)
+
+      const response = await fetch(`http://localhost:3000/users/${json[i].id}`, {
+        method: 'DELETE',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(usersTable),
+      })
+      // after a user is deleted, need to update table
+      console.log(response)
+      console.log(json)
+    })
   }
 }
 
@@ -53,7 +70,10 @@ function addUser() {
       body: JSON.stringify(newUser),
     })
 
-    //removes all child elements created in fetchUser
+    // can add classList to last child in table then append new row to the table
+    // instead of removing all children, more efficent
+
+    // removes all child elements created in fetchUser
     function removeAllChildNodes(parent) {
       while (parent.firstChild) {
         parent.removeChild(parent.firstChild)
