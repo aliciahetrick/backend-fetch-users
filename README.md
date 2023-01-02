@@ -1,4 +1,8 @@
-## A CRUD RESTful API in Node.js that runs on an Express sever and uses a PostgreSQL database to fetch users from local database
+## A CRUD RESTful API
+
+### using Node.js that runs on an Express sever
+
+### and uses a PostgreSQL local database to fetch users
 
 To start back-end server:
 cd backend-fetch-users
