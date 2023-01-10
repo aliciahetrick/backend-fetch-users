@@ -2,7 +2,6 @@
 const usersTable = document.querySelector('.users-table')
 
 const updateUser = document.querySelector('.put-section')
-console.log(updateUser)
 
 // removes current table child elements and fetchesUsers
 function removeChidlrenAndFetchUsers() {
@@ -80,11 +79,33 @@ async function fetchUsers() {
       updateSection.appendChild(updateEmailInput)
       updateSection.appendChild(submitUpdateButton)
       updateUser.append(updateSection)
+
+      submitUpdateButton.addEventListener('click', async function () {
+        console.log('clicked')
+        updateNameInput.remove()
+        updateEmailInput.remove()
+        submitUpdateButton.remove()
+        /// put request goes here
+
+        const newName = updateNameInput.value
+        const newEmail = updateEmailInput.value
+
+        const response = await fetch(`http://localhost:3000/users/${json[i].id}`, {
+          method: 'PUT',
+          headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            name: newName,
+            email: newEmail,
+          }),
+        })
+
+        removeChidlrenAndFetchUsers()
+      })
     })
   }
-
-  // <input type="text" placeholder="email" class="create-email" />
-  // <button class="create-user-button">Create a user</button>
 
   // TODO:
   // can add classList to last child in table then append new row to the table
@@ -125,6 +146,3 @@ function addUser() {
 }
 
 addUser()
-
-// TODO:
-// PUT - update
