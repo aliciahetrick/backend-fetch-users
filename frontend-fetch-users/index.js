@@ -1,6 +1,5 @@
 // selects element where users data will be placed
 const usersTable = document.querySelector('.users-table')
-
 const updateUser = document.querySelector('.put-section')
 
 // removes current table child elements and fetchesUsers
@@ -81,11 +80,9 @@ async function fetchUsers() {
       updateUser.append(updateSection)
 
       submitUpdateButton.addEventListener('click', async function () {
-        console.log('clicked')
         updateNameInput.remove()
         updateEmailInput.remove()
         submitUpdateButton.remove()
-        /// put request goes here
 
         const newName = updateNameInput.value
         const newEmail = updateEmailInput.value
@@ -106,15 +103,6 @@ async function fetchUsers() {
       })
     })
   }
-
-  // TODO:
-  // can add classList to last child in table then append new row to the table
-  // instead of removing all children, more efficent
-
-  // const lastChild = document.querySelector('.users-table').lastChild
-  // console.log(lastChild)
-  // lastChild.classList.add('lastTableEntry')
-  // lastChild.style.color = 'red'
 }
 
 fetchUsers()
