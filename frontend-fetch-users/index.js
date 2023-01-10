@@ -1,6 +1,9 @@
 // selects element where users data will be placed
 const usersTable = document.querySelector('.users-table')
 
+const updateUser = document.querySelector('.put-section')
+console.log(updateUser)
+
 // removes current table child elements and fetchesUsers
 function removeChidlrenAndFetchUsers() {
   function removeAllChildNodes(parent) {
@@ -29,6 +32,9 @@ async function fetchUsers() {
     const td2 = document.createElement('td')
     td2.append(json[i].email)
 
+    const updateButton = document.createElement('button')
+    updateButton.textContent = 'Update user'
+
     const tableButton = document.createElement('button')
     tableButton.textContent = 'x'
 
@@ -36,6 +42,7 @@ async function fetchUsers() {
     tr.appendChild(td0)
     tr.appendChild(td1)
     tr.appendChild(td2)
+    tr.appendChild(updateButton)
     tr.appendChild(tableButton)
 
     usersTable.append(tr)
@@ -52,7 +59,32 @@ async function fetchUsers() {
       })
       removeChidlrenAndFetchUsers()
     })
+
+    // PUT / UPDATE
+    updateButton.addEventListener('click', function () {
+      console.log('clicked')
+      const updateSection = document.createElement('section')
+
+      const updateNameInput = document.createElement('input')
+      updateNameInput.setAttribute('type', 'text')
+      updateNameInput.setAttribute('placeholder', 'name')
+
+      const updateEmailInput = document.createElement('input')
+      updateEmailInput.setAttribute('type', 'text')
+      updateEmailInput.setAttribute('placeholder', 'email')
+
+      const submitUpdateButton = document.createElement('button')
+      submitUpdateButton.textContent = 'Submit Update'
+
+      updateSection.appendChild(updateNameInput)
+      updateSection.appendChild(updateEmailInput)
+      updateSection.appendChild(submitUpdateButton)
+      updateUser.append(updateSection)
+    })
   }
+
+  // <input type="text" placeholder="email" class="create-email" />
+  // <button class="create-user-button">Create a user</button>
 
   // TODO:
   // can add classList to last child in table then append new row to the table
