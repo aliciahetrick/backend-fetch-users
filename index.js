@@ -97,8 +97,15 @@ User.sync({ alter: true })
       email: 'bear@example.com',
     })
   })
-  .then(() => {
+  .then((data) => {
     console.log('User added to the database')
+    console.log(data.toJSON())
+    ;(data.name = 'coco'), (data.email = 'coco@example.com')
+    return data.save()
+  })
+  .then((data) => {
+    console.log('User updated')
+    console.log(data.toJSON())
   })
   .catch((err) => {
     console.log('Error syncing table and model', err)
