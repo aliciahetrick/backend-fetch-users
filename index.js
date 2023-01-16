@@ -116,9 +116,25 @@ const User = sequelize.define(
 ///////////////////
 // find all users:
 
+// User.sync({ alter: true })
+//   .then(() => {
+//     return User.findAll({ where: { name: 'bear' } })
+//   })
+//   .then((data) => {
+//     data.forEach((element) => {
+//       console.log(element.toJSON())
+//     })
+//   })
+//   .catch((err) => {
+//     console.log(err)
+//   })
+
+///////////////////
+// finding with limits
+
 User.sync({ alter: true })
   .then(() => {
-    return User.findAll({ where: { name: 'bear' } })
+    return User.findAll({ limit: 2 })
   })
   .then((data) => {
     data.forEach((element) => {
