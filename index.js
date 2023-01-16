@@ -90,25 +90,40 @@ const User = sequelize.define(
 // adding a safetly measure to srop only tables ending in _test:
 // sequelize.drop({ match: /_test$/ })
 
+// User.sync({ alter: true })
+//   .then(() => {
+//     return User.bulkCreate([
+//       {
+//         name: 'bear',
+//         email: 'bear@example.com',
+//       },
+//       {
+//         name: 'coco',
+//         email: 'coco@example.com',
+//       },
+//     ])
+//   })
+//   .then((data) => {
+//     // console.log(data.toJSON())
+//     data.forEach((element) => {
+//       console.log(element.toJSON())
+//     })
+//   })
+//   .catch((err) => {
+//     console.log('Error syncing table and model', err)
+//   })
+
+///////////////////
+
 User.sync({ alter: true })
   .then(() => {
-    return User.bulkCreate([
-      {
-        name: 'bear',
-        email: 'bear@example.com',
-      },
-      {
-        name: 'coco',
-        email: 'coco@example.com',
-      },
-    ])
+    return User.findAll()
   })
   .then((data) => {
-    // console.log(data.toJSON())
     data.forEach((element) => {
       console.log(element.toJSON())
     })
   })
   .catch((err) => {
-    console.log('Error syncing table and model', err)
+    console.log(err)
   })
