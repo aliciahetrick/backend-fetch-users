@@ -114,10 +114,11 @@ const User = sequelize.define(
 //   })
 
 ///////////////////
+// find all users:
 
 User.sync({ alter: true })
   .then(() => {
-    return User.findAll()
+    return User.findAll({ where: { name: 'bear' } })
   })
   .then((data) => {
     data.forEach((element) => {
