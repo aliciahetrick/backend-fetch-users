@@ -66,21 +66,21 @@ const User = sequelize.define(
 // if it does exist already and you want to update, you have to pass optional arguments to .sync(argument)
 // {force: true} drops the table if it already exosts and replaces it with a new one
 // {alter: true} current state of the database is modified to match table, instead of dropping table and recreating it
-User.sync({ alter: true })
-  .then(() => {
-    // console.log('Table and model synced successfully!')
-    // .build() does not actually communicate with your database
-    const user = User.build({ name: 'alicia', email: 'alicia@example.com' })
-    // console.log(user.name)
-    // .save() is needed to add data to database
-    return user.save()
-  })
-  .then((data) => {
-    console.log('User added to the database')
-  })
-  .catch((err) => {
-    console.log('Error syncing table and model', err)
-  })
+// User.sync({ alter: true })
+//   .then(() => {
+//     // console.log('Table and model synced successfully!')
+//     // .build() does not actually communicate with your database
+//     const user = User.build({ name: 'alicia', email: 'alicia@example.com' })
+//     // console.log(user.name)
+//     // .save() is needed to add data to database
+//     return user.save()
+//   })
+//   .then((data) => {
+//     console.log('User added to the database')
+//   })
+//   .catch((err) => {
+//     console.log('Error syncing table and model', err)
+//   })
 
 // can also sync multiple models at a time by calling .sync() on the sequelize instance:
 // sequelize.sync({force: true})
@@ -89,3 +89,17 @@ User.sync({ alter: true })
 // User.drop()
 // adding a safetly measure to srop only tables ending in _test:
 // sequelize.drop({ match: /_test$/ })
+
+User.sync({ alter: true })
+  .then(() => {
+    return User.create({
+      name: 'bear',
+      email: 'bear@example.com',
+    })
+  })
+  .then(() => {
+    console.log('User added to the database')
+  })
+  .catch((err) => {
+    console.log('Error syncing table and model', err)
+  })
