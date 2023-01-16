@@ -11,8 +11,8 @@ const sequelize = new Sequelize(
   }
 )
 
-// async/await syntax:
 //////////////////
+// async/await syntax to check sequelize connection:
 
 // async function myFunction() {
 //   await sequelize.authenticate()
@@ -21,14 +21,62 @@ const sequelize = new Sequelize(
 
 // myFunction()
 
-// .then/.catch syntax:
+//////////////////
+// .then/.catch syntax to check sequelize connection:
+
+// sequelize
+//   .authenticate()
+//   .then(() => {
+//     console.log('Connection successful')
+//   })
+//   .catch((err) => {
+//     console.log('Error connecting', err)
+//   })
+
+// creates the model/table:
+// sequelize automatically pluralizes model names
+const User = sequelize.define(
+  'user',
+  {
+    name: {
+      type: Sequelize.DataTypes.STRING,
+      allowNull: false,
+    },
+    email: {
+      type: Sequelize.DataTypes.STRING,
+      allowNull: false,
+      defaultValue: `${this.name}@email.com`,
+    },
+  },
+  {
+    //optional third argument
+  }
+)
+
+// console.log(sequelize.models.user)
+
 //////////////////
 
-sequelize
-  .authenticate()
-  .then(() => {
-    console.log('Connection successful')
+// SYNCING AND DROPPING TABLES ARE DESTRUCTIVE:
+// will loose data saved to the database
+
+// connects the model/table to the database:
+// only creates a table if it does not exist
+// if it does exist already and you want to update, you have to pass optional arguments to .sync(argument)
+// {force: true} drops the table if it already exosts and replaces it with a new one
+// {alter: true} current state of the database is modified to match table, instead of dropping table and recreating it
+User.sync({ force: true })
+  .then((data) => {
+    console.log('Table and model synced successfully!')
   })
   .catch((err) => {
-    console.log('Error connecting', err)
+    console.log('Error syncing table and model', err)
   })
+
+// can also sync multiple models at a time by calling .sync() on the sequelize instance:
+// sequelize.sync({force: true})
+
+// can drop/delete a whole table by using .drop method:
+// User.drop()
+// adding a safetly measure to srop only tables ending in _test:
+// sequelize.drop({ match: /_test$/ })
